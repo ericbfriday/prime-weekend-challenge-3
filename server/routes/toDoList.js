@@ -43,25 +43,25 @@ router.post('/', function(req, res){
                     console.log('logging resultObj from toDoList.js POST function -> ', resultObj.rows);
                     res.send(resultObj.rows);
                 }
-            })
+            });
         }});
 });
 
 router.delete('/:id', function(req, res){
     var itemToDelete = req.params.id;
-    console.log('inside delete /:id of /toDoList -> ', itemToDelete);
+    // console.log('inside delete /:id of /toDoList -> ', itemToDelete);
     pool.connect(function (connectionError, client, done) {
-        console.log('inside /:id delete of /toDoList - calling query');
+        // console.log('inside /:id delete of /toDoList - calling query');
         var queryString = 'DELETE FROM to_do_list WHERE id=($1);';
         var values = [itemToDelete];
         client.query(queryString, values, function(err, result){
             done();
             if (err) {
-                console.log('logging error inside delete /:id client.query -> ', connectionError);
+                // console.log('logging error inside delete /:id client.query -> ', connectionError);
                 res.sendStatus(500);
             } else {
-                console.log('logging result from delete /:id -> ', result.rows);
-                res.sendStatus(200);
+                // console.log('logging result from delete /:id -> ', result.rows);
+                res.sendStatus(202);
             }
         });
     });

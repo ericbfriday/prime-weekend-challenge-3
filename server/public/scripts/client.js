@@ -7,6 +7,7 @@ var completeButton = '';
 function onReady() {
     console.log('jQuery loaded.');
     $('#addItemButton').on('click', addItem);
+    $('#toDoListBody').on('click', '.deleteButton', removeItem);
     getItems();
 }
 
@@ -24,11 +25,11 @@ function addItem() {
             getItems();
         }
     });
+    $('#itemToAdd').val(""); // clears input after submit
 }
 
 function appendItems(data) {
     // console.log('loggin data inside appendItems() -> ', data);
-    
     $('#toDoListBody').empty();
     for (var i = 0; i < data.length; i++){
         completeButtonToggle(status);
@@ -46,8 +47,11 @@ function appendItems(data) {
 function completeButtonToggle (data) {
     if (data == false) {
         completeButton = '<button class="markIncomplete">Mark Incomplete</button>';
-    } else {
+    } else if (data == true) {
         completeButton = '<button class="markComplete">Mark Complete</button>';
+    } else {
+        console.log('Error in completeButtonToggle()');
+        
     }
     // console.log('loggin completeButton inside completeButtonToggle -> ', completeButton);
     
@@ -69,5 +73,14 @@ function markComplete() {
     }
 
 function removeItem() {
-
+    var itemToRemove = $(this).closest('tr').data();
+    $.ajax({
+        url:'/toDoList/' + itemToRemove.id,
+        type: 'DELETE',
+        data: itemToRemove,
+        success: function(response) {
+        //   console.log('deleting item in removeItem() -> ', itemToRemove);    
+          getItems(); 
+        } // end success
+      }); //end ajax
 }
