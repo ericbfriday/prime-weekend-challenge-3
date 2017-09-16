@@ -97,6 +97,25 @@ function getItems() {
       }); //end ajax
 }
 
+function removeItem() {
+    var confirmation = confirm("Do you REALLY want to delete this task?");
+    if (confirmation == true) {
+    var itemToRemove = $(this).closest('tr').data();
+    console.log('logging itemToRemove -> ', itemToRemove);
+    $.ajax({
+        url:'/toDoList/' + itemToRemove.id,
+        type: 'DELETE',
+        data: itemToRemove,
+        success: function(response) {
+        //   console.log('deleting item in removeItem() -> ', itemToRemove);    
+          getItems(); 
+        } // end success
+      }); //end ajax
+    } else {
+        return;
+    }
+}
+
 function toggleComplete() {
     var itemToMarkComplete = $(this).closest('tr').data();
     console.log('logging itemToMarkComplete -> ', itemToMarkComplete);
@@ -110,18 +129,4 @@ function toggleComplete() {
             getItems();
         }
     });
-}
-
-function removeItem() {
-    var itemToRemove = $(this).closest('tr').data();
-    console.log('logging itemToRemove -> ', itemToRemove);
-    $.ajax({
-        url:'/toDoList/' + itemToRemove.id,
-        type: 'DELETE',
-        data: itemToRemove,
-        success: function(response) {
-        //   console.log('deleting item in removeItem() -> ', itemToRemove);    
-          getItems(); 
-        } // end success
-      }); //end ajax
 }
