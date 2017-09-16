@@ -1,7 +1,5 @@
 console.log('js');
 
-$(document).ready(onReady);
-
 var completeButton = '';
 
 function onReady() {
@@ -45,23 +43,17 @@ function appendItems(data) {
             $('#toDoListBody').append('<tr data-id="' + id 
             + '" data-status="' + status
             + '" class="' + rowClass 
-            + '"><td>' + item 
-            + '</td><td>' + completeButton 
+            + '"><td><del>' + item // displays item and adds strikeout to completed items
+            + '</del></td><td>' + completeButton 
             + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
         } else if (status == false) {
             $('#toDoListBody').prepend('<tr data-id="' + id 
             + '" data-status="' + status
             + '" class="' + rowClass 
-            + '"><td>' + item 
+            + '"><td>' + item // displays item 
             + '</td><td>' + completeButton 
             + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
         }
-        // HARD MODE IDEA:
-        // create an if loop based on status
-        // if completed, then append to DOM
-        // if incomple, then prepend command to DOM.
-
-
     }
 }
 
@@ -118,15 +110,14 @@ function removeItem() {
 
 function toggleComplete() {
     var itemToMarkComplete = $(this).closest('tr').data();
-    console.log('logging itemToMarkComplete -> ', itemToMarkComplete);
-    
     $.ajax({
         url: '/toDoList/' + itemToMarkComplete.id,
         type: 'PUT',
         data: itemToMarkComplete,
         success: function(data) {
-            console.log('SUCCESS in markComplete', data);
             getItems();
         }
     });
 }
+
+$(document).ready(onReady);

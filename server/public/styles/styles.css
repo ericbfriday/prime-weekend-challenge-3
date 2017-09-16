@@ -9,3 +9,15 @@ input {
 .incomplete {
     background-color: lightgray;
 }
+
+#addItemButton {
+    float: right;
+}
+
+.rowClass {
+    border-radius: 8px;
+}
+
+.table-curved tr {
+    border-radius: 10px;
+}

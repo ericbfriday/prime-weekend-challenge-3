@@ -18,15 +18,16 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <header>
-    <h1>Friday's To Do List For Any Day of the Week</h1>
+    <h1>Friday's To Do List for Any Day of the Week</h1>
 </header>
-<body>
+
+<body id="mainBody">
     <div id="toDoListInput">
         <input type="text" name="itemToAdd" id="itemToAdd" placeholder="What do you need to do?">
         <button class="btn" id="addItemButton">Add Item</button>
     </div>
     <div id="toDoListTable">
-        <table class="table">
+        <table class="table align-middle">
             <thead>
                 <tr>
                     <th>Item</th>
@@ -34,10 +35,25 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody id="toDoListBody" class="table table-striped">
+            <tbody id="toDoListBody" class="table table-curved">
 
             </tbody>
     </div>
+<!--  PLACE TO ADD 'COMPLETE ITEMS' SECTION IF TIME PERMITS
+    <div id="toDoListTableComplete">
+        <p>Complete Items</p>
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Toggle Complete</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="toDoListBodyComplete" class="table table-curved">
+    
+                </tbody> -->
+        </div>
 </body>
 
 </html>
