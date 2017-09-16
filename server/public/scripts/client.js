@@ -41,19 +41,34 @@ function appendItems(data) {
         completeButtonToggle(status);
         backgroundColorToggle(status);
         // console.log('loggin id, item, & status inside appendItems() -> ', id, item, status);
-        $('#toDoListBody').append('<tr data-id="' + id 
-        + '" data-status="' + status
-        + '" class="' + rowClass 
-        + '"><td>' + item 
-        + '</td><td>' + completeButton 
-        + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
+        if (status == true) {
+            $('#toDoListBody').append('<tr data-id="' + id 
+            + '" data-status="' + status
+            + '" class="' + rowClass 
+            + '"><td>' + item 
+            + '</td><td>' + completeButton 
+            + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
+        } else if (status == false) {
+            $('#toDoListBody').prepend('<tr data-id="' + id 
+            + '" data-status="' + status
+            + '" class="' + rowClass 
+            + '"><td>' + item 
+            + '</td><td>' + completeButton 
+            + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
+        }
+        // HARD MODE IDEA:
+        // create an if loop based on status
+        // if completed, then append to DOM
+        // if incomple, then prepend command to DOM.
+
+
     }
 }
 
 function backgroundColorToggle (params) {
-    if (params == false) {
+    if (params == true) {
         rowClass = 'complete';
-    } else if (params == true) {
+    } else if (params == false) {
         rowClass = 'incomplete';
     } else {
         console.log('Error in completeButtonToggle()');
@@ -62,9 +77,10 @@ function backgroundColorToggle (params) {
 
 function completeButtonToggle (data) {
     if (data == false) {
-        completeButton = '<button class="btn btn-success markIncomplete">Mark Incomplete</button>';
+        completeButton = '<button class="btn btn-success markComplete">Mark Complete</button>';
     } else if (data == true) {
-        completeButton = '<button class="btn btn-warning markComplete">Mark Complete</button>';
+        // completeButton = 'Completed!' <-- Filler text I no longer need
+        completeButton = '<button class="btn btn-warning markIncomplete">Mark Incomplete</button>';
     } else {
         console.log('Error in completeButtonToggle()');
     }
