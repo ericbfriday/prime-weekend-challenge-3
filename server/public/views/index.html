@@ -17,18 +17,20 @@
     <link rel="stylesheet" href="vendors/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
 </head>
-
+<header>
+    <h1>Friday's To Do List For Any Day of the Week</h1>
+</header>
 <body>
     <div id="toDoListInput">
-        <input type="text" name="itemToAdd" id="itemToAdd"><button id="addItemButton">Add Item</button>
+        <input type="text" name="itemToAdd" id="itemToAdd" placeholder="What do you need to do?">
+        <button class="btn" id="addItemButton">Add Item</button>
     </div>
     <div id="toDoListTable">
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Item</th>
-                    <th>Status</th>
-                    <th>Mark Complete</th>
+                    <th>Toggle Complete</th>
                     <th>Delete</th>
                 </tr>
             </thead>

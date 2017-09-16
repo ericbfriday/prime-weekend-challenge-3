@@ -8,6 +8,8 @@ function onReady() {
     console.log('jQuery loaded.');
     $('#addItemButton').on('click', addItem);
     $('#toDoListBody').on('click', '.deleteButton', removeItem);
+    $('#toDoListBody').on('click', '.markIncomplete', toggleComplete);
+    $('#toDoListBody').on('click', '.markComplete', toggleComplete);
     getItems();
 }
 
@@ -32,29 +34,29 @@ function appendItems(data) {
     // console.log('loggin data inside appendItems() -> ', data);
     $('#toDoListBody').empty();
     for (var i = 0; i < data.length; i++){
-        completeButtonToggle(status);
         var id = data[i].id;
         var item = data[i].item;
         var status = data[i].status;
+        completeButtonToggle(status);
         // console.log('loggin id, item, & status inside appendItems() -> ', id, item, status);
         $('#toDoListBody').append('<tr data-id="' + id 
+        + '" data-status="' + status
         + '"><td>' + item 
         + '</td><td>' + completeButton 
-        + '</td><td><button class="deleteButton">Delete</button></td>');
+        + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
     }
 }
 
 function completeButtonToggle (data) {
     if (data == false) {
-        completeButton = '<button class="markIncomplete">Mark Incomplete</button>';
+        completeButton = '<button class="btn btn-success markIncomplete">Mark Incomplete</button>';
     } else if (data == true) {
-        completeButton = '<button class="markComplete">Mark Complete</button>';
+        completeButton = '<button class="btn btn-warning markComplete">Mark Complete</button>';
     } else {
         console.log('Error in completeButtonToggle()');
         
     }
     // console.log('loggin completeButton inside completeButtonToggle -> ', completeButton);
-    
 }
 
 function getItems() {
@@ -68,12 +70,24 @@ function getItems() {
       }); //end ajax
 }
 
-function markComplete() {
+function toggleComplete() {
+    var itemToMarkComplete = $(this).closest('tr').data();
+    console.log('logging itemToMarkComplete -> ', itemToMarkComplete);
     
-    }
+    $.ajax({
+        url: '/toDoList/' + itemToMarkComplete.id,
+        type: 'PUT',
+        data: itemToMarkComplete,
+        success: function(data) {
+            console.log('SUCCESS in markComplete', data);
+            getItems();
+        }
+    });
+}
 
 function removeItem() {
     var itemToRemove = $(this).closest('tr').data();
+    console.log('logging itemToRemove -> ', itemToRemove);
     $.ajax({
         url:'/toDoList/' + itemToRemove.id,
         type: 'DELETE',

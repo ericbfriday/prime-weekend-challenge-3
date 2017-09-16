@@ -21,10 +21,10 @@ router.get('/', function (req, res) {
     });
 });
 
-router.post('/', function(req, res){
+router.post('/', function (req, res) {
     var itemID = req.body.item;
     console.log('logging itemID ->', itemID);
-    
+
     var status = false; // sets complete status to false as default
     // console.log('in post inventory route!');
     pool.connect(function (connectionError, client, done) {
@@ -34,27 +34,28 @@ router.post('/', function(req, res){
         } else {
             var queryString = 'INSERT INTO to_do_list(item) VALUES($1)';
             var values = [itemID];
-            client.query(queryString, values, function(queryError, resultObj) {
+            client.query(queryString, values, function (queryError, resultObj) {
                 done();
                 if (queryError) {
                     res.sendStatus(500);
-                    console.log('Query Error inside toDoList.js POST function');                    
+                    console.log('Query Error inside toDoList.js POST function');
                 } else {
                     console.log('logging resultObj from toDoList.js POST function -> ', resultObj.rows);
                     res.send(resultObj.rows);
                 }
             });
-        }});
+        }
+    });
 });
 
-router.delete('/:id', function(req, res){
+router.delete('/:id', function (req, res) {
     var itemToDelete = req.params.id;
     // console.log('inside delete /:id of /toDoList -> ', itemToDelete);
     pool.connect(function (connectionError, client, done) {
         // console.log('inside /:id delete of /toDoList - calling query');
         var queryString = 'DELETE FROM to_do_list WHERE id=($1);';
         var values = [itemToDelete];
-        client.query(queryString, values, function(err, result){
+        client.query(queryString, values, function (err, result) {
             done();
             if (err) {
                 // console.log('logging error inside delete /:id client.query -> ', connectionError);
@@ -67,7 +68,40 @@ router.delete('/:id', function(req, res){
     });
 });
 
-router.put('/:id', function(req, res){
+router.put('/:id', function (req, res) {
+    var itemToToggleComplete = req.params.id;
+    var status = req.body.status;
+    var newStatus = 'false';
+    console.log('logging itemToToggleComplete in toDoList.js PUT -> ', itemToToggleComplete);
+    console.log('logging status in toDoList.js PUT -> ', status);
+    
+    if (status == 'false') {
+        newStatus = 'TRUE';
+
+    } else if (status == 'true') {
+        newStatus = 'FALSE';
+
+    } else {
+        console.log('Error in determing complete/incomplete for item. Toggling to incomplete by default. Status: ', status);
+        newStatus = 'true';
+    }
+
+    // start
+    pool.connect(function (connectionError, client, done) {
+        var queryString = 'UPDATE to_do_list SET status=($1) WHERE id=($2);';
+        var values = [newStatus, itemToToggleComplete];
+        client.query(queryString, values, function (err, result) {
+            done();
+            if (err) {
+                // console.log('logging error inside delete /:id client.query -> ', connectionError);
+                res.sendStatus(500);
+            } else {
+                // console.log('logging result from delete /:id -> ', result.rows);
+                res.sendStatus(202);
+            }
+        });
+    });
+    // end
 
 });
 
