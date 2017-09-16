@@ -1,3 +1,11 @@
 input {
     width: 100%;
 }
+
+.complete {
+    background-color: lightgreen;
+}
+
+.incomplete {
+    background-color: lightgray;
+}

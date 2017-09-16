@@ -37,14 +37,27 @@ function appendItems(data) {
         var id = data[i].id;
         var item = data[i].item;
         var status = data[i].status;
+        // var rowClass = 'incomplete';
         completeButtonToggle(status);
+        backgroundColorToggle(status);
         // console.log('loggin id, item, & status inside appendItems() -> ', id, item, status);
         $('#toDoListBody').append('<tr data-id="' + id 
         + '" data-status="' + status
+        + '" class="' + rowClass 
         + '"><td>' + item 
         + '</td><td>' + completeButton 
         + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
     }
+}
+
+function backgroundColorToggle (params) {
+    if (params == false) {
+        rowClass = 'complete';
+    } else if (params == true) {
+        rowClass = 'incomplete';
+    } else {
+        console.log('Error in completeButtonToggle()');
+    } 
 }
 
 function completeButtonToggle (data) {
@@ -54,9 +67,7 @@ function completeButtonToggle (data) {
         completeButton = '<button class="btn btn-warning markComplete">Mark Complete</button>';
     } else {
         console.log('Error in completeButtonToggle()');
-        
     }
-    // console.log('loggin completeButton inside completeButtonToggle -> ', completeButton);
 }
 
 function getItems() {
