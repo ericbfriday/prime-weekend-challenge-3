@@ -1,0 +1,27 @@
+{
+  "name": "prime-weekend-challenge-3",
+  "version": "1.0.0",
+  "description": "Your team has started a new business in Uptown for pet-enthusiasts that also need to vacation without their beloved pets.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericbfriday/Pet-Hotel-Single-Table.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericbfriday/Pet-Hotel-Single-Table/issues"
+  },
+  "homepage": "https://github.com/ericbfriday/Pet-Hotel-Single-Table#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "pg": "^7.3.0"
+  },
+  "devDependencies": {}
+}
