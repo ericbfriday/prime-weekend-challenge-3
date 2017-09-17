@@ -51,7 +51,9 @@ function appendItems(data) {
             + '" data-status="' + status
             + '" class="' + rowClass 
             + '"><td><del>' + item // displays item and adds strikeout to completed items
-            + '</del></td><td>' + completeButton 
+            + '</del></td>' 
+            + '<td>' + priority.charAt(0).toUpperCase() + priority.slice(1) + '</td>'
+            +'<td>' + completeButton 
             + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
         } else if (status == false) {
             $('#toDoListBody').prepend('<tr data-id="' + id 
@@ -59,6 +61,7 @@ function appendItems(data) {
             + '" class="' + rowClass 
             + ' ' + priority
             + '"><td>' + item // displays item 
+            + '</td><td>' + priority.charAt(0).toUpperCase() + priority.slice(1) + '</td>'
             + '</td><td>' + completeButton 
             + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');
         }
