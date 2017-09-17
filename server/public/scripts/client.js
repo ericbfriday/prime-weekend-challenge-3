@@ -1,6 +1,7 @@
 console.log('js');
 
 var completeButton = '';
+var taskPrioirity = '';
 
 function onReady() {
     console.log('jQuery loaded.');
@@ -13,9 +14,14 @@ function onReady() {
 
 function addItem() {
     var itemToAdd = $('#itemToAdd').val();
+    var itemPriority = $('input[name=priority]:checked').val();
+    // console.log('loggin itemPriority in addItem() -> ', itemPriority);
     var objectToSend = {
-        item: itemToAdd
+        item: itemToAdd,
+        priority: itemPriority
     };
+    console.log('loggin priority in addItem() -> ', itemPriority);
+    
     $.ajax({
         url: '/toDoList',
         type: 'POST',
@@ -35,10 +41,11 @@ function appendItems(data) {
         var id = data[i].id;
         var item = data[i].item;
         var status = data[i].status;
-        // var rowClass = 'incomplete';
+        var priority = data[i].priority;
+        console.log('loggin priority in appendItems -> ', priority);
         completeButtonToggle(status);
         backgroundColorToggle(status);
-        // console.log('loggin id, item, & status inside appendItems() -> ', id, item, status);
+
         if (status == true) {
             $('#toDoListBody').append('<tr data-id="' + id 
             + '" data-status="' + status
@@ -50,6 +57,7 @@ function appendItems(data) {
             $('#toDoListBody').prepend('<tr data-id="' + id 
             + '" data-status="' + status
             + '" class="' + rowClass 
+            + ' ' + priority
             + '"><td>' + item // displays item 
             + '</td><td>' + completeButton 
             + '</td><td><button class="btn btn-danger deleteButton">Delete</button></td>');

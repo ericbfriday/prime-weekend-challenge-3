@@ -23,6 +23,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
     var itemID = req.body.item;
+    var itemPriority = req.body.priority;
     console.log('logging itemID ->', itemID);
 
     var status = false; // sets complete status to false as default
@@ -32,8 +33,8 @@ router.post('/', function (req, res) {
             // console.log(connectionError, 'logging connection1');
             res.sendStatus(500);
         } else {
-            var queryString = 'INSERT INTO to_do_list(item) VALUES($1)';
-            var values = [itemID];
+            var queryString = 'INSERT INTO to_do_list(item, priority) VALUES($1, $2)';
+            var values = [itemID, itemPriority];
             client.query(queryString, values, function (queryError, resultObj) {
                 done();
                 if (queryError) {

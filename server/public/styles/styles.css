@@ -21,3 +21,15 @@ input {
 .table-curved tr {
     border-radius: 10px;
 }
+
+.low {
+    background-color: yellow;
+}
+
+.medium {
+    background-color: orange;
+}
+
+.high {
+    background-color: red;
+}
