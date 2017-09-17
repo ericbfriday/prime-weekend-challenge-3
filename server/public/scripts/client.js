@@ -32,6 +32,7 @@ function addItem() {
         }
     });
     $('#itemToAdd').val(""); // clears input after submit
+    $('input[name=priority]:checked').attr('checked',false);
 }
 
 function appendItems(data) {
@@ -45,7 +46,6 @@ function appendItems(data) {
         console.log('loggin priority in appendItems -> ', priority);
         completeButtonToggle(status);
         backgroundColorToggle(status);
-
         if (status == true) {
             $('#toDoListBody').append('<tr data-id="' + id 
             + '" data-status="' + status

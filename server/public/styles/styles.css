@@ -3,7 +3,7 @@ input {
 }
 
 .complete {
-    background-color: lightgreen;
+    background-color: lightgray;
 }
 
 .incomplete {
@@ -18,18 +18,46 @@ input {
     border-radius: 8px;
 }
 
-.table-curved tr {
+.table-curved {
     border-radius: 10px;
 }
 
+.markComplete {
+    background-color: lightgray;
+    color: black;
+    border-color: darkgray;
+}
+
+.markComplete:hover {
+    background-color: darkgray;
+    color: white;
+    border-color: darkgray;
+}
+
+.markIncomplete {
+    background-color: lightslategray;
+    color: white;
+    border-color: darkgray;
+}
+
+.markIncomplete:hover {
+    background-color: darkgray;
+    color: white;
+    border-color: darkgray;
+}
+
 .low {
-    background-color: yellow;
+    background-color: lightyellow;
 }
 
 .medium {
-    background-color: orange;
+    background-color: lightsalmon;
 }
 
 .high {
-    background-color: red;
+    background-color: lightcoral;
+}
+
+#importanceInputs {
+    display: block;
 }
