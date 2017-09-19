@@ -1,44 +1,40 @@
-# CRUD Up Pet Hotel
+Weekend Challenge #3
 
-Your team has started a new business in Uptown for pet-enthusiasts that also need to vacation without their beloved pets.
+Hello Primers!
 
-As an MVP (Minimum Viable Product), you will create an application that allows the user to:
+Welcome to your 3rd weekend challenge!
 
-|  CRUD | What?  | REST | SQL |
-|-------|--------|------|-----|
-| **C**reate | Add/check in a pet| POST | INSERT|
-| **R**ead | View all pets |  GET | SELECT |
-| **U**pate | Update a pet's info| PUT | UPDATE |
-| **D**elete |Remove a pet | DELETE | DELETE |
+Full stack is pretty awesome, huh? The idea that you are able to spin up a full application architecture in such a short time is pretty incredible. This weekend is all about showing us that you have a handle on each of the different parts of the full stack.
 
-IMPORTANT: Please include a `database.sql` file in your submitted Git repo that has all the queries you used to create your database and tables.
+The To-Do App
 
-## Implementation Details
-### Database Table
-Create a database of the pets with their check-in and check-out dates. Don't forget to add your primary key!
+You are going to create a TO DO application. This type of application is very common to tackle when learning a new language, which makes it extremely valuable to work through for the first time. Chances are good that at some point in your career you will tackle this again while learning another language.
 
-_Columns_
+Here are the specific components for the challenge:
 
-* id
-* pet name
-* breed
-* color
-* checked-in (boolean w/ Default of false)
+Create a front end experience (e.g. a form) that allows a user to create a Task.
+When the Task is created, it should be stored inside of a database.
+Whenever a Task is created, the front end should refresh to show all tasks that need to be completed.
+Each Task should have an option to "Complete" or "Delete".
+When a Task is complete, its visual representation should change on the front end. For example, the background of the task container could change from gray to green. The complete option should be checked off. Each of these are accomplished in CSS, but will need to hook into logic to know whether or not the task is complete.
+Whether or not a Task is complete should also be stored in the database.
+Deleting a Task should remove it both from the front end as well as the database.
+Styling
 
-### View
-MVP of this app will have one view for Pets.
+Make sure that you also show us your best styling chops.
 
-* Read all pets from the database and display them on the DOM. Use bootstrap to style the page a bit.
-* Add new pets to the database.
-* Add button to each row for removing pets from the database. 
-* Add a button to each row for check-in/check-out. 
-	* If the pet is checked-in (true in db) the button on the view should read 'Check Out'. Clicking this button should toggle the boolean to false in the database. 
-	* If the pet is checked-out (false in the db) the button on the view should read 'Check In'. Clicking this button should toggle the boolean to true in the database.
+Approach
 
-## Hard Mode
-* Add edit/update buttons to each row to allow for all fields to be editable and when update is clicked the new information is stored for that pet. You can forgo the edit button and just make the fields clickable to reveal a input box. This will require some front end work. 
-	* For the update, just like with delete, you will need the Primary Key (pet id) to locate which pet is being updated. Try to make the server side API look like this: `PUT /pets/:id` with a body containing new form fields. 
-* Based on the the checked in or out boolean, use css/bootstrap to color the rows differently based on whether the pet is still checked in to the hotel.
-* Add checked-in and checked-out date columns. You can re-create your table or investigate `ALTER TABLE` syntax. Working with dates can be tricky. The date string collected on the DOM has to be recognized by the database. 
-	* Change the functionality of the 'Check Out' button to insert the current date when 'Check Out' is clicked into the checked-out column in the database.
-	* Once the pet has been checked out, disallow them from being toggled checked-in again. 
+We would recommend you spend some time thinking about how to approach this problem. Think through all the logic that will be needed prior to writing any code. Take your time, relax, remember that impostor syndrome is real, and that you are capable of knocking this out of the park!
+
+Database Structure
+
+Please include a database.sql text file in your repo that includes all of your CREATE TABLE queries. This is so we can re-create your database while testing your app.
+
+HARD MODE
+
+Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
+
+PRO MODE
+
+In whatever fashion you would like, create an "are you sure: yes / no" option when deleting a task. Once again, you can interrupt this however you would like.
